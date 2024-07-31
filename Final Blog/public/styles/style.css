@@ -1,0 +1,84 @@
+.nav-pills {
+    --bs-nav-pills-link-active-bg: #009746;
+}
+.nav{
+    --bs-nav-link-color: #039a49;
+}
+
+.title{
+    font-weight: 800;
+    font-size: 2.3rem;
+}
+
+.logo{
+    
+    margin-right: 5%;
+}
+
+#Verse{
+    color:#17cd6cce;
+
+}
+
+body{
+    background-image: linear-gradient(to bottom, #E1F0DA, #D4E7C5);
+    font-family: 'Montserrat';
+    line-height: 2rem;
+}
+
+
+.display-4 {
+    font-size: calc(1.475rem + 2.7vw);
+    font-weight: 600;
+    line-height: 1.2;
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif ;
+}
+
+
+
+
+.card-header{
+    background:  #D4E7C5;
+}
+.card-body{
+    background:  #D4E7C5;
+}
+
+h1{
+    
+    font-weight: 600;
+    color:#35522f;
+}
+
+
+.fixed-card-size {
+    height: 500px;
+    max-height: 360px;
+}
+.fixed-size-img {
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.post{
+    float: none;
+}
+.blog-img {
+    float: right;
+        max-width: 50%;
+    height: auto;
+}
+
+.center{
+    margin: 0 45%;
+    align-items: center;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .blog-img{
+        display: none;
+    }
+  }

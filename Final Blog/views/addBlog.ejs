@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs") %>
+
+
+<section class="form container">
+    <form action="/submit" method="post">
+        <div class="mb-3">
+          <label for="title" class="form-label">Blog Title</label>
+          <input type="title" class="form-control" id="title" name="title" aria-describedby="Title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" class="form-control" name="description" rows="10" cols="126%" placeholder="Enter your description here..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-success center">Submit</button>
+        <br><br>
+      </form>
+</section>
+
+<%- include("partials/footer.ejs") %>
