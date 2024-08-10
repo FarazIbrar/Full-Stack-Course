@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Righteous", cursive;
+  min-height: 100vh;
+  background-color: #a9c9ff;
+  background-image: linear-gradient(180deg, #a9c9ff 0%, #bbebff 100%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 5rem;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-width: 1200px;
+  max-height: 800px;
+  margin: 0 auto;
+
+  border-radius: 15px;
+  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  background: inherit;
+}
+
+.face {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.face1 {
+  box-sizing: border-box;
+  padding: 40px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(100%);
+  transition: 0.5s;
+
+}
+
+.face1 h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 3em;
+}
+
+.face1 p {
+  font-size: 1.5em;
+}
+
+.java {
+  background-color: #fffc00;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.face2 {
+  z-index: 1;
+}
+
+.btn{
+  background: inherit;
+}
+
+.plus-icon {
+  font-size: 30rem;
+  color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+  line-height: 1;
+}
+
+.orderButton {
+  position: fixed;  
+  top: 1%;
+  left: 90%;
+  padding: 5px;
+  box-sizing: border-box;
+  min-height: 7vh;
+  box-shadow: 0 15px 60px rgba(91, 91, 91, 0.5);
+  background: inherit;
+}
+
+.dropdown-menu{
+  background: inherit;
+}
+
+
+.face2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+  transition: 0.5s;
+  background: inherit;
+}
+
+
+.face1 {
+  padding: 20px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.action-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.update-btn, .delete-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.update-btn:hover {
+  color: #4CAF50;
+}
+
+.delete-btn:hover {
+  color: #FF5252;
+}
+
+.book-title {
+  color: #4CAF50;
+  margin-bottom: 10px;
+  padding-right: 80px; /* Make space for the buttons */
+}
+
+/* ... rest of the CSS remains the same ... */
+.btnAdd {
+  background: inherit;
+}
+
+.card:hover .face1 {
+  transform: translateY(0);
+}
+
+.card:hover .face2 img {
+  transform: scale(1.1);
+}
+
+.card:hover .plus-icon {
+  transform: scale(1.1);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.orderButton:hover {
+  transform: scale(1.05);
+  
+}
+
+#update-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.3rem;
+}
+
+#summary{
+  min-height: 250px;
+}
+
+#update-form input,
+#update-form textarea {
+  height: 4rem;
+  border: 1px solid #4CAF50;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+#update-form button {
+  background: #4CAF50;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+#update-form button[type="button"] {
+  background: #FF5252;
+}
