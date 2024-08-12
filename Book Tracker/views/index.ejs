@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <title>Book Management</title>
+</head>
+
+<body>
+
+    
+
+
+    <div class="dropdown">
+        <form action="/" method="GET" class="order-form">
+            <select name="orderBy" onchange="this.form.submit()" class="select">
+                <option value="">Order Books</option>
+                <option value="title">Order by Title</option>
+                <option value="author">Order by Author</option>
+                <option value="date">Order by Date Read</option>
+                <option value="recommendation">Order by Recommendation</option>
+            </select>
+        </form>
+    </div>
+
+    <div class="container">
+        <% books.forEach((book)=> { %>
+            <div class="card">
+                <div class="face face2">
+                    <img src="<%= book.imageurl %>" alt="Book Cover">
+                </div>
+                <div class="face face1">
+                    <div class="content">
+                        <div class="action-buttons">
+                            <button class="update-btn" onclick="showUpdateForm(<%= book.id %>)"><i
+                                    class="fas fa-pencil-alt"></i></button>
+                            <form action="/delete" method="post">
+                                <button class="delete-btn" type="submit">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                                <input type="hidden" name="deleteBookId" value="<%= book.id %>">
+                            </form>
+                        </div>
+                        <div id="book-info">
+                            <h2 class="book-title">
+                                <%= book.title %> - by <%= book.author %>
+                            </h2>
+                            <p class="date-read">Date read: <%= book.date ? new Date(book.date).toISOString().slice(0,
+                                    10) : 'Not specified' %>. How strongly I recommend it: <%= book.recommendation %>/10
+                            </p>
+                            <p class="book-summary">
+                                <%= book.summary %>
+                            </p>
+                            <p class="read-more">
+                                <a href="<%= book.notesurl %>" class="read-notes">Read my notes</a>, or go to the <a
+                                    href="#" class="amazon-link">Amazon page</a> for details and reviews.
+                            </p>
+                        </div>
+                        <form action="/update" method="post" class="update-form" id="update-form-<%= book.id %>"
+                            style="display: none;">
+                            <input type="hidden" name="id" value="<%= book.id %>">
+                            <input type="text" name="title" value="<%= book.title %>" placeholder="Book Title" required>
+                            <input type="text" name="author" value="<%= book.author %>" placeholder="Author" required>
+                            <input type="date" name="date"
+                                value="<%= book.date ? new Date(book.date).toISOString().slice(0, 10) : '' %>" required>
+                            <input type="number" name="recommendation" value="<%= book.recommendation %>" min="1"
+                                max="10" placeholder="Recommendation (1-10)" required>
+                            <textarea name="summary" placeholder="Book Summary" required><%= book.summary %></textarea>
+                            <input type="url" name="notesURL" value="<%= book.notesurl %>" placeholder="Notes URL">
+                            <input type="url" name="imageURL" value="<%= book.imageurl %>" placeholder="Image URL">
+                            <button type="submit">Update</button>
+                            <button type="button" onclick="hideUpdateForm(<%= book.id %>)">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
+                <div class="card">
+                    <div class="face face2">
+                        <button class="btn" type="button" onclick="showAddForm()">
+                            <div id="plus-icon">+</div>
+                        </button>
+                        <form action="/add" id="add-form" style="display: none;" method="post">
+                            <input name="title" type="text" id="new-book-title" placeholder="Book Title" required>
+                            <input name="author" type="text" id="new-author" placeholder="Author" required>
+                            <input name="date" type="date" id="new-date-read" required>
+                            <input name="recommendation" type="number" id="new-recommendation" min="1" max="10"
+                                placeholder="Recommendation (1-10)" required>
+                            <textarea name="summary" id="new-summary" placeholder="Book Summary" required></textarea>
+                            <input name="notesURL" type="url" id="new-notes-url" placeholder="Notes URL">
+                            <input name="imageURL" type="url" id="new-image-url" placeholder="Image URL">
+                            <button type="submit">Add Book</button>
+                            <button type="button" onclick="hideAddForm()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="./js/index.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

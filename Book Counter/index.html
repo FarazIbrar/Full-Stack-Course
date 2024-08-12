@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="index.css">
 
-  <title>Hello, world!</title>
+  <title>Book Management</title>
 </head>
 
 <body>
@@ -27,11 +27,11 @@
       <a class="dropdown-item" href="#">Something else here</a>
     </div>
   </div>
-  <div class="container">
 
+  <div class="container">
     <div class="card">
       <div class="face face2">
-        <img src="https://covers.openlibrary.org/b/id/14653492-L.jpg" alt="Java">
+        <img src="https://covers.openlibrary.org/b/id/14653492-L.jpg" alt="Book Cover">
       </div>
       <div class="face face1">
         <div class="content">
@@ -79,12 +79,26 @@
 
     <div class="card">
       <div class="face face2">
-        <button class="btn" type="submit">
-          <div class="plus-icon">+</div>
+        <button class="btn" type="button" onclick="showAddForm()">
+          <div id="plus-icon">+</div>
         </button>
-      </div>
+        <form id="add-form" style="display: none;" type="post">
+          <input type="text" id="new-book-title" placeholder="Book Title" required>
+          <input type="text" id="new-author" placeholder="Author" required>
+          <input type="date" id="new-date-read" required>
+          <input type="number" id="new-recommendation" min="1" max="10" placeholder="Recommendation (1-10)" required>
+          <textarea id="new-summary" placeholder="Book Summary" required></textarea>
+          <input type="url" id="new-notes-url" placeholder="Notes URL">
+          <input type="url" id="new-amazon-url" placeholder="Amazon Page URL">
+          <button type="submit">Add Book</button>
+          <button type="button" onclick="hideAddForm()">Cancel</button>
+        </form>
+      </div> 
+      
     </div>
-  </div>
+      </div>
+    
+  
   <!-- Optional JavaScript -->
   <script src="index.js"></script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -97,7 +111,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-    
+
 </body>
 
 </html>
