@@ -9,8 +9,16 @@ body {
     font-family: "Righteous", cursive;
     min-height: 100vh;
     background-color: #a9c9ff;
-    background-image: linear-gradient(180deg, #D1E9F6 0%, #FEFAE0 100%);
+    /* background-image: linear-gradient(180deg, #D1E9F6 0%, #FEFAE0 100%); */
     font-family: 'Exo', sans-serif;
+    background-image: url('/Recourses/bg.svg');
+    background-size: cover; /* Adjusts the size of the background image */
+    background-repeat: no-repeat; /* Prevents the background from repeating */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Makes the background image fixed */
+    /* Optional: additional properties for full-page background */
+    height: 100vh; /* Ensures the background covers the full viewport height */
+    width: 100%;
 }
 
 .container {
@@ -26,8 +34,8 @@ body {
 
 .card {
     position: relative;
-    width: 100%;
-    height: 100vh;
+    width: 50%;
+    height: 80vh;
     max-width: 1200px;
     max-height: 800px;
     margin: 0 auto;
@@ -62,11 +70,11 @@ body {
 .face1 h2 {
     margin: 0;
     padding: 0;
-    font-size: 3em;
+    font-size: 1.5em;
 }
 
 .face1 p {
-    font-size: 1.5em;
+    font-size: 1rem;
 }
 
 .java {
@@ -105,7 +113,7 @@ body {
 .select{
     background: inherit;
     border: none;
-    font-size: larger;
+    font-size:medium;
 }
 
 .dropdown-menu {
@@ -193,23 +201,43 @@ body {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.9);
-    padding: 2% 5%;
+    padding: 7%;
     display: none;
     /* Hidden by default, shown when triggered */
     flex-direction: column;
     gap: 100px;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 /* Summary Textarea */
 .update-form textarea {
-    min-height: 250px;
+    min-height: 40%;
 }
+
+
+.date-read {
+    line-height: 1.6;
+  }
+  
+  .date-read .date {
+    font-weight: bold;
+    color: #0066cc;
+  }
+  
+  .date-read .recommendation {
+    font-weight: bold;
+    color: #009933;
+  }
+  
+  .pt-3 {
+    padding-top: 1rem;
+  }
+
 
 /* Input and Textarea Fields */
 .update-form input,
 .update-form textarea {
-    height: 4rem;
+    height: 3rem;
     border: 1px solid #4CAF50;
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
@@ -252,10 +280,14 @@ body {
 
 #add-form input,
 #add-form textarea {
-    height: 4rem;
     border: 1px solid #4CAF50;
     background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
+
+}
+
+#new-summary{
+    height: 50%;
 }
 
 #add-form button {

@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import axios from "axios";
 
 const app = express();
 const port = 3000;
@@ -19,11 +20,11 @@ app.use(express.static("public"));
 
 async function checkRead(orderBy = '') {
     let query = `
-        SELECT id, title, author, date, recommendation, summary, notesURL, imageURL
+        SELECT id, title, author, date, recommendation, summary, olid
         FROM book_info
     `;
 
-    switch(orderBy) {
+    switch (orderBy) {
         case 'title':
             query += ' ORDER BY title ASC';
             break;
@@ -64,25 +65,40 @@ app.get('/', async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-    const { title, author, date, recommendation, summary, notesURL, imageURL } = req.body;
+    const { title, date, recommendation, summary } = req.body;
     try {
+        const encodedTitle = encodeURIComponent(title);
+        console.log(encodedTitle);
+        const result = await axios.get(`https://openlibrary.org/search.json?title=${encodedTitle}&fields=key,title,author_name,editions`);
+        const firstDoc = result.data.docs[0];
+        const firstEdition = firstDoc.editions.docs[0];
+        const OLID = firstEdition.key.split('/')[2];
+        const author_name = firstDoc["author_name"]
         await db.query(
-            "INSERT INTO book_info (title, author, date, recommendation, summary, notesURL, imageURL) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-            [title, author, date, recommendation, summary, notesURL, imageURL]
+            "INSERT INTO book_info (title, author, date, recommendation, summary, olid) VALUES ($1, $2, $3, $4, $5, $6)",
+            [title, author_name, date, recommendation, summary, OLID]
         );
         res.redirect("/");
     } catch (err) {
         console.log(err);
         res.status(500).send("Error adding book");
     }
+
 });
 
 app.post("/update", async (req, res) => {
-    const { id, title, author, date, recommendation, summary, notesURL, imageURL } = req.body;
+    const { id, title, date, recommendation, summary } = req.body;
     try {
+        const encodedTitle = encodeURIComponent(title);
+        console.log(encodedTitle);
+        const result = await axios.get(`https://openlibrary.org/search.json?title=${encodedTitle}&fields=key,title,author_name,editions`);
+        const firstDoc = result.data.docs[0];
+        const firstEdition = firstDoc.editions.docs[0];
+        const OLID = firstEdition.key.split('/')[2];
+        const author_name = firstDoc["author_name"]
         await db.query(
-            "UPDATE book_info SET title = $1, author = $2, date = $3, recommendation = $4, summary = $5, notesURL = $6, imageURL = $7 WHERE id = $8",
-            [title, author, date, recommendation, summary, notesURL, imageURL, id]
+            "UPDATE book_info SET title = $1, author = $2, date = $3, recommendation = $4, summary = $5, olid=$6 WHERE id = $7",
+            [title, author_name, date, recommendation, summary, OLID, id]
         );
         res.redirect("/");
     } catch (err) {
@@ -91,7 +107,7 @@ app.post("/update", async (req, res) => {
     }
 });
 
-app.post("/delete",async (req, res) => {
+app.post("/delete", async (req, res) => {
     const id = req.body.deleteBookId;
     try {
         await db.query("DELETE FROM book_info WHERE id = ($1)", [id]);
